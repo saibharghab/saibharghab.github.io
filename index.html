@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sai Bharghava Kumar — IT Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --border: #1e1e2e;
+    --accent: #00e5a0;
+    --accent2: #0084ff;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --card: #13131c;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* GRID BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* GLOW ORB */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(0,229,160,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  section, nav, footer { position: relative; z-index: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1.05;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.4s;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.6s;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.8s;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0a0f;
+    font-weight: 500;
+  }
+  .btn-primary:hover { background: #00ffb3; transform: translateY(-2px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* STATUS BADGE */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0,229,160,0.08);
+    border: 1px solid rgba(0,229,160,0.2);
+    border-radius: 100px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 6rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    margin-bottom: 3rem;
+    line-height: 1.2;
+  }
+
+  /* INCIDENT CARDS */
+  .incidents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .incident-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .incident-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .incident-card:hover {
+    border-color: rgba(0,229,160,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  .incident-card:hover::before { opacity: 1; }
+
+  .incident-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .incident-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .severity {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 100px;
+    letter-spacing: 0.05em;
+  }
+  .severity.critical { background: rgba(255,50,50,0.1); color: #ff6b6b; border: 1px solid rgba(255,50,50,0.2); }
+  .severity.high { background: rgba(255,150,50,0.1); color: #ffaa5e; border: 1px solid rgba(255,150,50,0.2); }
+  .severity.medium { background: rgba(255,220,50,0.1); color: #ffd95e; border: 1px solid rgba(255,220,50,0.2); }
+
+  .incident-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    font-weight: 400;
+  }
+
+  .incident-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .incident-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    padding: 0.25rem 0.6rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--muted);
+  }
+
+  /* TOOLS */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .tool-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: all 0.3s;
+  }
+  .tool-card:hover {
+    border-color: rgba(0,132,255,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+
+  .tool-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: rgba(0,132,255,0.1);
+    border: 1px solid rgba(0,132,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .tool-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+  }
+
+  .tool-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+  }
+  .skill-item:hover {
+    border-color: rgba(0,229,160,0.3);
+    color: var(--accent);
+  }
+
+  .skill-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.8;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* CONTACT */
+  .contact-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-box h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+
+  .contact-box p {
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0 4rem;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero, .section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .divider { margin: 0 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">sai.bharghava // IT</div>
+  <ul class="nav-links">
+    <li><a href="#incidents">Incidents</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="status-badge">
+    <span class="status-dot"></span>
+    Open to IT Internships · Flagstaff, AZ
+  </div>
+  <div class="hero-tag">// IT Support Engineer · Systems · Cloud</div>
+  <h1>I <em>Fix</em><br/>IT Problems.</h1>
+  <p class="hero-sub">
+    Master's in Information Technology at Northern Arizona University.
+    Real incident documentation. Real tools. Ready from day one.
+  </p>
+  <div class="hero-ctas">
+    <a href="#incidents" class="btn btn-primary">↓ View Portfolio</a>
+    <a href="https://github.com/saibharghab" target="_blank" class="btn btn-ghost">GitHub</a>
+    <a href="https://www.linkedin.com/in/yidupuganti-sai-bharghava-kumar-b41388221/" target="_blank" class="btn btn-ghost">LinkedIn</a>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- INCIDENTS -->
+<section class="section" id="incidents">
+  <div class="section-label">// 01 — Incident Portfolio</div>
+  <h2 class="section-title reveal">Real-world IT<br/>Incident Documentation</h2>
+
+  <div class="incidents-grid">
+    <div class="incident-card reveal">
+      <div class="incident-header">
+        <span class="incident-num">INC-001</span>
+        <span class="severity high">HIGH</span>
+      </div>
+      <div class="incident-title">Network Outage</div>
+      <p class="incident-desc">Complete loss of network connectivity across all workstations due to a faulty switch cable causing DHCP failure. Diagnosed via APIPA address detection and cable testing.</p>
+      <div class="incident-tags">
+        <span class="tag">TCP/IP</span>
+        <span class="tag">DHCP</span>
+        <span class="tag">Switch</span>
+        <span class="tag">Root Cause Analysis</span>
+      </div>
+    </div>
+
+    <div class="incident-card reveal">
+      <div class="incident-header">
+        <span class="incident-num">INC-002</span>
+        <span class="severity medium">MEDIUM</span>
+      </div>
+      <div class="incident-title">DNS Resolution Failure</div>
+      <p class="incident-desc">DNS service crash caused by disk space exhaustion from unrotated logs. Users lost internet access while internal systems remained functional.</p>
+      <div class="incident-tags">
+        <span class="tag">DNS</span>
+        <span class="tag">Windows Server</span>
+        <span class="tag">Disk Management</span>
+        <span class="tag">Log Rotation</span>
+      </div>
+    </div>
+
+    <div class="incident-card reveal">
+      <div class="incident-header">
+        <span class="incident-num">INC-003</span>
+        <span class="severity critical">CRITICAL</span>
+      </div>
+      <div class="incident-title">File Server Unresponsive</div>
+      <p class="incident-desc">SMB file sharing service collapsed under 100% CPU load caused by a backup agent running during peak business hours. Resolved via local console access.</p>
+      <div class="incident-tags">
+        <span class="tag">Windows Server</span>
+        <span class="tag">SMB</span>
+        <span class="tag">Performance</span>
+        <span class="tag">Backup Scheduling</span>
+      </div>
+    </div>
+  </div>
+
+  <br/><br/>
+  <a href="https://github.com/saibharghab/IT-Incident-Portfolio" target="_blank" class="btn btn-ghost reveal">View Full Portfolio on GitHub →</a>
+</section>
+
+<hr class="divider"/>
+
+<!-- TOOLS -->
+<section class="section" id="tools">
+  <div class="section-label">// 02 — IT Tools</div>
+  <h2 class="section-title reveal">Python Tools<br/>Built for Real IT Work</h2>
+
+  <div class="tools-grid">
+    <div class="tool-card reveal">
+      <div class="tool-icon">🖥️</div>
+      <div class="tool-name">System Health Checker</div>
+      <p class="tool-desc">Monitors CPU, RAM, and disk usage in real time. Alerts on WARNING (80%) and CRITICAL (90%) thresholds with a clean status report.</p>
+    </div>
+
+    <div class="tool-card reveal">
+      <div class="tool-icon">📋</div>
+      <div class="tool-name">Log Analyzer</div>
+      <p class="tool-desc">Scans server log files and categorizes entries by severity — INFO, WARNING, ERROR, CRITICAL — with a full summary report.</p>
+    </div>
+
+    <div class="tool-card reveal">
+      <div class="tool-icon">📡</div>
+      <div class="tool-name">Network Uptime Monitor</div>
+      <p class="tool-desc">Pings multiple servers and websites to check connectivity. Immediately flags offline targets and reports overall network health.</p>
+    </div>
+  </div>
+
+  <br/><br/>
+  <a href="https://github.com/saibharghab/IT-Tools" target="_blank" class="btn btn-ghost reveal">View Tools on GitHub →</a>
+</section>
+
+<hr class="divider"/>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="section-label">// 03 — Skills</div>
+  <h2 class="section-title reveal">Technical Skills</h2>
+
+  <div class="skills-grid">
+    <div class="skill-item reveal"><span class="skill-dot"></span>Network Troubleshooting</div>
+    <div class="skill-item reveal"><span class="skill-dot"></span>Windows Server</div>
+    <div class="skill-item reveal"><span class="skill-dot"></span>TCP/IP · DNS · DHCP</div>
+    <div class="skill-item reveal"><span class="skill-dot"></span>Python Scripting</div>
+    <div class="skill-item reveal"><span class="skill-dot"></span>Log Analysis</div>
+    <div class="skill-item reveal"><span class="skill-dot"></span>IT Incident Management</div>
+    <div class="skill-item reveal"><span class="skill-dot"></span>System Monitoring</div>
+    <div class="skill-item reveal"><span class="skill-dot"></span>GitHub / Version Control</div>
+    <div class="skill-item reveal"><span class="skill-dot"></span>Cloud Infrastructure</div>
+    <div class="skill-item reveal"><span class="skill-dot"></span>IT Documentation</div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-label">// 04 — About</div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <h2 class="section-title" style="margin-bottom:1.5rem">Not just a student.<br/>A problem solver.</h2>
+      <p>I'm Sai Bharghava Kumar, an IT Master's student at Northern Arizona University with a focus on building real, hands-on experience beyond the classroom.</p>
+      <p>While most students send resumes, I built an incident portfolio, wrote automation tools, and documented everything the way a real IT team would.</p>
+      <p>I'm targeting IT Support, Systems Administration, and Cloud Infrastructure roles where I can contribute from day one.</p>
+      <br/>
+      <a href="https://www.linkedin.com/in/yidupuganti-sai-bharghava-kumar-b41388221/" target="_blank" class="btn btn-primary">Connect on LinkedIn</a>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat-box">
+        <div class="stat-num">3</div>
+        <div class="stat-label">IT Incidents Documented</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Python Tools Built</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">NAU</div>
+        <div class="stat-label">Master's in IT</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">✓</div>
+        <div class="stat-label">US Work Ready</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="contact-box reveal">
+    <h3>Let's Work Together</h3>
+    <p>I'm actively looking for IT internships and entry-level roles in the USA. Open to IT Support, Systems Admin, Network, and Cloud roles.</p>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/yidupuganti-sai-bharghava-kumar-b41388221/" target="_blank" class="btn btn-primary">LinkedIn</a>
+      <a href="https://github.com/saibharghab" target="_blank" class="btn btn-ghost">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Sai Bharghava Kumar · Built to stand out · Northern Arizona University
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
