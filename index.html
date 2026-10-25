@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Sai Bharghava Kumar — Data Analyst Portfolio</title>
+<title>Sai Bharghava Kumar — Cloud &amp; Data Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
   :root {
@@ -213,8 +213,9 @@
 <body>
 
 <nav>
-  <div class="nav-logo">sai.bharghava // data</div>
+  <div class="nav-logo">sai.bharghava // cloud</div>
   <ul class="nav-links">
+    <li><a href="#cloud">Cloud</a></li>
     <li><a href="#DataAnalyst">DataAnalyst</a></li>
     <li><a href="#aiml-projects">AI / ML</a></li>
     <li><a href="#cybersecurity">Cybersecurity</a></li>
@@ -231,27 +232,29 @@
     <span class="status-dot"></span>
     Open to Full-Time Roles · OPT Eligible · 36 months · No Sponsorship Required
   </div>
-  <div class="hero-tag">// Data Analyst · ML · Power BI · Azure Certified · AWS</div>
+  <div class="hero-tag">// Cloud · AWS Certified · Terraform · Data · Python</div>
   <h1>I Turn Data<br/>Into <em>Decisions.</em></h1>
   <p class="hero-sub">
     M.S. Information Technology at Northern Arizona University.
-    End-to-end analytics pipelines, Power BI dashboards, and ML models
-    backed by AWS and Azure cloud experience.
+    Highly available AWS infrastructure built with Terraform, serverless APIs,
+    and automated security checks, alongside analytics pipelines and ML models.
   </p>
   <div class="hero-badges">
+    <span class="badge lit">AWS</span>
+    <span class="badge lit">Terraform</span>
     <span class="badge lit">Python</span>
-    <span class="badge lit">Power BI</span>
-    <span class="badge lit">Azure</span>
+    <span class="badge">Lambda</span>
+    <span class="badge">Power BI</span>
+    <span class="badge">Azure</span>
     <span class="badge">Scikit-learn</span>
     <span class="badge">Plotly Dash</span>
     <span class="badge">SQL</span>
     <span class="badge">ARIMA / Prophet</span>
-    <span class="badge">AWS</span>
     <span class="badge">Flask</span>
     <span class="badge">Pandas</span>
   </div>
   <div class="hero-ctas">
-    <a href="#projects" class="btn btn-primary">&#8595; View Projects</a>
+    <a href="#cloud" class="btn btn-primary">&#8595; View Projects</a>
     <a href="https://github.com/saibharghab" target="_blank" class="btn btn-ghost">GitHub</a>
     <a href="https://www.linkedin.com/in/yidupuganti-sai-bharghava-kumar-b41388221/" target="_blank" class="btn btn-ghost">LinkedIn</a>
   </div>
@@ -259,8 +262,71 @@
 
 <hr class="divider"/>
 
+<section class="section" id="cloud">
+  <div class="section-label">// 01 — Cloud Projects</div>
+  <h2 class="section-title reveal">AWS Cloud<br/>Engineering Portfolio</h2>
+
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-num">CLOUD-001</div>
+      <div class="project-title">Highly Available Web Application on AWS</div>
+      <p class="project-desc">Three-tier web app built entirely with Terraform. A VPC across two Availability Zones puts the load balancer in public subnets and the app servers and database in private ones. Linux EC2 instances run in an Auto Scaling group behind an Application Load Balancer, with RDS MySQL in private subnets. Tested by terminating instances and loading CPU to watch it heal and scale.</p>
+      <div class="project-metrics">
+        <div><span class="metric-val">2 AZs</span><span class="metric-label">Availability Zones</span></div>
+        <div><span class="metric-val">2&#8594;4</span><span class="metric-label">Auto-scaling EC2</span></div>
+        <div><span class="metric-val">39</span><span class="metric-label">Terraform resources</span></div>
+      </div>
+      <div class="project-tags">
+        <span class="tag blue">Terraform</span><span class="tag blue">VPC</span><span class="tag blue">EC2 Auto Scaling</span>
+        <span class="tag">ALB</span><span class="tag">RDS MySQL</span><span class="tag">CloudWatch</span>
+        <span class="tag">Secrets Manager</span><span class="tag">Linux</span>
+      </div>
+      <a href="https://github.com/saibharghab/aws-cloud-projects/tree/main/01-ha-web-app" target="_blank" class="project-link">github.com/saibharghab/aws-cloud-projects/01-ha-web-app &#8594;</a>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">CLOUD-002</div>
+      <div class="project-title">Serverless Task Tracker API</div>
+      <p class="project-desc">REST API to create, read, update and delete tasks, built with API Gateway, five Python Lambda functions and DynamoDB. Each function has its own IAM role allowing only the one DynamoDB action it needs. The whole stack deploys or tears down from a single CloudFormation template, with throttling, access logs and a 5xx alarm.</p>
+      <div class="project-metrics">
+        <div><span class="metric-val">5</span><span class="metric-label">Lambda functions</span></div>
+        <div><span class="metric-val">1:1</span><span class="metric-label">IAM role per function</span></div>
+        <div><span class="metric-val">1 cmd</span><span class="metric-label">Deploy or tear down</span></div>
+      </div>
+      <div class="project-tags">
+        <span class="tag blue">API Gateway</span><span class="tag blue">Lambda</span><span class="tag blue">DynamoDB</span>
+        <span class="tag">CloudFormation</span><span class="tag">IAM</span><span class="tag">CloudWatch</span><span class="tag">Python</span>
+      </div>
+      <a href="https://github.com/saibharghab/aws-cloud-projects/tree/main/02-serverless-task-api" target="_blank" class="project-link">github.com/saibharghab/aws-cloud-projects/02-serverless-task-api &#8594;</a>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">CLOUD-003</div>
+      <div class="project-title">AWS Security and Cost Checker</div>
+      <p class="project-desc">Scheduled Lambda functions deployed with Terraform. Every morning the checker flags security groups open to SSH or RDP, S3 buckets without Block Public Access, unencrypted EBS volumes and untagged EC2 instances, then emails a summary through SNS and saves the full report to S3. A second function stops dev servers at night and starts them on weekday mornings.</p>
+      <div class="project-metrics">
+        <div><span class="metric-val">4</span><span class="metric-label">Security checks</span></div>
+        <div><span class="metric-val">Daily</span><span class="metric-label">EventBridge schedule</span></div>
+        <div><span class="metric-val">Tag</span><span class="metric-label">Scoped IAM stop/start</span></div>
+      </div>
+      <div class="project-tags">
+        <span class="tag blue">Lambda</span><span class="tag blue">EventBridge</span><span class="tag blue">Terraform</span>
+        <span class="tag">SNS</span><span class="tag">S3</span><span class="tag">IAM</span><span class="tag">boto3</span>
+      </div>
+      <a href="https://github.com/saibharghab/aws-cloud-projects/tree/main/03-security-cost-checker" target="_blank" class="project-link">github.com/saibharghab/aws-cloud-projects/03-security-cost-checker &#8594;</a>
+    </div>
+
+  </div>
+
+  <br/><br/>
+  <a href="https://github.com/saibharghab/aws-cloud-projects" target="_blank" class="btn btn-ghost reveal">View All Cloud Projects on GitHub &#8594;</a>
+</section>
+
+<hr class="divider"/>
+
 <section class="section" id="DataAnalyst">
-  <div class="section-label">// 01 — Data Analytics Projects</div>
+  <div class="section-label">// 02 — Data Analytics Projects</div>
   <h2 class="section-title reveal">End-to-end Analytics<br/>Portfolio</h2>
 
   <div class="projects-grid">
@@ -339,7 +405,7 @@
 <hr class="divider"/>
 
 <section class="section" id="aiml-projects">
-  <div class="section-label">// 02 — AI / ML Engineering Projects</div>
+  <div class="section-label">// 03 — AI / ML Engineering Projects</div>
   <h2 class="section-title reveal">Machine Learning<br/>Engineering Portfolio</h2>
 
   <div class="projects-grid">
@@ -434,7 +500,7 @@
 <hr class="divider"/>
 
 <section class="section" id="cybersecurity">
-  <div class="section-label">// 03 — Cybersecurity Projects</div>
+  <div class="section-label">// 04 — Cybersecurity Projects</div>
   <h2 class="section-title reveal">Security Engineering<br/>Portfolio</h2>
 
   <div class="projects-grid">
@@ -476,11 +542,11 @@
     <div class="project-card reveal">
       <div class="project-num">SEC-003</div>
       <div class="project-title">Zero Trust Network Architecture &#8212; Capstone Research</div>
-      <p class="project-desc">Led a 4-person team to design a Zero Trust enterprise architecture for a simulated healthcare environment. Produced a 40-page architecture report covering identity verification, micro-segmentation, least-privilege access, and continuous monitoring. Controls mapped to NIST 800-207. Findings adopted as reference framework by the capstone cohort.</p>
+      <p class="project-desc">Led a 2-person team to design a Zero Trust enterprise architecture for a simulated healthcare environment. Produced a 40-page architecture report covering identity verification, micro-segmentation, least-privilege access, and continuous monitoring. Controls mapped to NIST 800-207. Findings adopted as reference framework by the capstone cohort.</p>
       <div class="project-metrics">
         <div><span class="metric-val">40pg</span><span class="metric-label">Architecture report</span></div>
         <div><span class="metric-val">NIST</span><span class="metric-label">800-207 mapped</span></div>
-        <div><span class="metric-val">4</span><span class="metric-label">Person team led</span></div>
+        <div><span class="metric-val">2</span><span class="metric-label">Person team led</span></div>
       </div>
       <div class="project-tags">
         <span class="tag blue">Azure AD</span><span class="tag blue">MFA</span>
@@ -511,7 +577,7 @@
 <hr class="divider"/>
 
 <section class="section" id="incidents">
-  <div class="section-label">// 04 — IT Incident Portfolio</div>
+  <div class="section-label">// 05 — IT Incident Portfolio</div>
   <h2 class="section-title reveal">Real-world IT<br/>Incident Documentation</h2>
 
   <div class="incidents-grid">
@@ -559,7 +625,7 @@
 <hr class="divider"/>
 
 <section class="section" id="tools">
-  <div class="section-label">// 05 — Python IT Tools</div>
+  <div class="section-label">// 06 — Python IT Tools</div>
   <h2 class="section-title reveal">Python Tools<br/>Built for Real IT Work</h2>
 
   <div class="tools-grid">
@@ -587,7 +653,7 @@
 <hr class="divider"/>
 
 <section class="section" id="experience">
-  <div class="section-label">// 06 — Experience</div>
+  <div class="section-label">// 07 — Experience</div>
   <h2 class="section-title reveal">Work History</h2>
 
   <div class="exp-timeline reveal">
@@ -623,7 +689,7 @@
 <hr class="divider"/>
 
 <section class="section" id="skills">
-  <div class="section-label">// 07 — Skills</div>
+  <div class="section-label">// 08 — Skills</div>
   <h2 class="section-title reveal">Technical Skills</h2>
 
   <div class="skills-grid">
@@ -631,6 +697,11 @@
     <div class="skill-item reveal"><span class="skill-dot"></span>Power BI · Plotly Dash</div>
     <div class="skill-item reveal"><span class="skill-dot"></span>Azure Data Factory / Blob</div>
     <div class="skill-item reveal"><span class="skill-dot"></span>AWS EC2 · S3 · Lambda · IAM</div>
+    <div class="skill-item reveal"><span class="skill-dot"></span>AWS VPC · ALB · Auto Scaling</div>
+    <div class="skill-item reveal"><span class="skill-dot"></span>RDS · DynamoDB · API Gateway</div>
+    <div class="skill-item reveal"><span class="skill-dot"></span>Terraform · CloudFormation</div>
+    <div class="skill-item reveal"><span class="skill-dot"></span>CloudWatch · EventBridge · SNS</div>
+    <div class="skill-item reveal"><span class="skill-dot"></span>Linux</div>
     <div class="skill-item reveal"><span class="skill-dot"></span>Scikit-learn · Random Forest</div>
     <div class="skill-item reveal"><span class="skill-dot"></span>ARIMA · Facebook Prophet</div>
     <div class="skill-item reveal"><span class="skill-dot"></span>MySQL · MongoDB · SQL</div>
@@ -649,29 +720,22 @@
 <hr class="divider"/>
 
 <section class="section" id="certifications">
-  <div class="section-label">// 08 — Certifications</div>
-  <h2 class="section-title reveal">Microsoft Azure<br/>Certified</h2>
+  <div class="section-label">// 09 — Certifications</div>
+  <h2 class="section-title reveal">AWS and Azure<br/>Certified</h2>
 
   <div class="certs-grid">
     <div class="cert-card reveal">
       <span class="cert-check">&#10004;</span>
       <div>
-        <div class="cert-name">Azure AI Fundamentals &#8212; AI-900</div>
-        <div class="cert-meta">Active · Jan 2024</div>
+        <div class="cert-name">AWS Certified Cloud Practitioner &#8212; CLF-C02</div>
+        <div class="cert-meta">Amazon Web Services</div>
       </div>
     </div>
     <div class="cert-card reveal">
       <span class="cert-check">&#10004;</span>
       <div>
         <div class="cert-name">Azure Fundamentals &#8212; AZ-900</div>
-        <div class="cert-meta">Active · Nov 2022</div>
-      </div>
-    </div>
-    <div class="cert-card reveal">
-      <span class="cert-check">&#10004;</span>
-      <div>
-        <div class="cert-name">Azure Developer Associate &#8212; AZ-204</div>
-        <div class="cert-meta">Renewal Passed · Jan 2024</div>
+        <div class="cert-meta">Microsoft · Nov 2022</div>
       </div>
     </div>
   </div>
@@ -680,24 +744,24 @@
 <hr class="divider"/>
 
 <section class="section" id="about">
-  <div class="section-label">// 09 — About</div>
+  <div class="section-label">// 10 — About</div>
   <div class="about-grid">
     <div class="about-text reveal">
       <h2 class="section-title" style="margin-bottom:1.5rem">Not just a student.<br/>A <em style="font-style:italic;color:var(--accent)">builder.</em></h2>
-      <p>I&#39;m Sai Bharghava Kumar, a Data Analyst and M.S. IT student at Northern Arizona University graduating May 2026, with a focus on analytics, machine learning, and cloud infrastructure.</p>
-      <p>I build end-to-end systems &#8212; real pipelines, real models, real dashboards &#8212; backed by AWS and Azure cloud experience and three Microsoft certifications.</p>
-      <p>Targeting Data Analyst, BI Engineer, and Cloud/Data roles where I can contribute from day one. OPT-eligible for 36 months, no sponsorship required.</p>
+      <p>I&#39;m Sai Bharghava Kumar. I finished my M.S. in Information Technology (Network Engineering) at Northern Arizona University in May 2026, and I work across cloud infrastructure, data and automation.</p>
+      <p>I build things end to end and test them on real AWS: a highly available web app in Terraform, a serverless API, and a daily security checker, plus analytics pipelines and ML models. I hold the AWS Certified Cloud Practitioner and Azure Fundamentals certifications.</p>
+      <p>Targeting Cloud Engineer, Cloud Support, DevOps and Cloud/Data roles. OPT-eligible for 36 months, no sponsorship required.</p>
       <br/>
       <a href="https://www.linkedin.com/in/yidupuganti-sai-bharghava-kumar-b41388221/" target="_blank" class="btn btn-primary">Connect on LinkedIn</a>
     </div>
     <div class="about-stats reveal">
       <div class="stat-box">
-        <div class="stat-num">12</div>
+        <div class="stat-num">15</div>
         <div class="stat-label">Total Projects</div>
       </div>
       <div class="stat-box">
-        <div class="stat-num">3</div>
-        <div class="stat-label">Azure Certifications</div>
+        <div class="stat-num">2</div>
+        <div class="stat-label">Cloud Certifications</div>
       </div>
       <div class="stat-box">
         <div class="stat-num">AWS</div>
@@ -716,7 +780,7 @@
 <section class="section" id="contact">
   <div class="contact-box reveal">
     <h3>Let&#39;s Work Together</h3>
-    <p>Actively looking for full-time Data Analyst, BI, and Cloud/Data roles in the USA.<br/>F-1 OPT eligible · 36 months · No sponsorship required.</p>
+    <p>Actively looking for full-time Cloud Engineer, DevOps, Data and Cloud/Data roles in the USA.<br/>F-1 OPT eligible · 36 months · No sponsorship required.</p>
     <div class="contact-links">
       <a href="https://www.linkedin.com/in/yidupuganti-sai-bharghava-kumar-b41388221/" target="_blank" class="btn btn-ghost">LinkedIn</a>
       <a href="https://github.com/saibharghab" target="_blank" class="btn btn-ghost">GitHub</a>
